@@ -28,7 +28,17 @@ Eval compute in (insertion(2::3::1::15::3999::8::146::nil)%Z).
 
 Lemma vstavi_deluje (x : Z) (l : list Z) : urejen ( vstavi x l).
 Proof.
-  admit.
+  apply (list_ind_2 (fun l => urejen (vstavi x l))) ; simpl ; auto.
+  - intros.
+   destruct (x <=? x0)%Z as []eqn:? ; simpl ; intuition.
+   + admit.
+   + admit.
+  -  admit. (** Vprašanje, če je to vredu, ali ta reč dejansko velja za vse a,b
+     ali samo če b>a????:    
+     intros ; simpl ; auto.
+    destruct (x <=? a)%Z as []eqn:?.
+    + simpl.
+      intuition. *)
 Qed.
 
 
