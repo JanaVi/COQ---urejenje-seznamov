@@ -26,20 +26,40 @@ Function insertion (l :list Z) :=
 
 Eval compute in (insertion(2::3::1::15::3999::8::146::nil)%Z).
 
-Lemma vstavi_deluje (x : Z) (l : list Z) : urejen ( vstavi x l).
+Lemma vstavi_deluje (x : Z) (l : list Z) : urejen l -> urejen ( vstavi x l).
 Proof.
-  apply (list_ind_2 (fun l => urejen (vstavi x l))) ; simpl ; auto.
+   induction l ; auto.
+   intro.
+   simpl.
+   case_eq ((x <=? a)%Z).
+   - intro.
+     firstorder.
+     now apply Zle_bool_imp_le.
+   - intro.
+     admit.
+
+
+         
+     
+
+
+
+
+(**  apply (list_ind_2 (fun l => urejen (vstavi x l))) ; simpl ; auto.
   - intros.
    destruct (x <=? x0)%Z as []eqn:? ; simpl ; intuition.
-   + admit.
-   + admit.
-  -  admit. (** Vprašanje, če je to vredu, ali ta reč dejansko velja za vse a,b
-     ali samo če b>a????:    
+   + apply Zle_bool_imp_le.
+     assumption.
+   + apply Z.leb_nle in Heqb.
+     apply Znot_le_gt in Heqb.
+     intuition.
+  -  (** Vprašanje, če je to vredu, ali ta reč dejansko velja za vse a,b
+     ali samo če b>a????: *)  
      intros ; simpl ; auto.
     destruct (x <=? a)%Z as []eqn:?.
     + simpl.
-      intuition. *)
-Qed.
+      intuition.
+Qed. *)
 
 
 Theorem AlgoritemDeluje (l: list Z):
